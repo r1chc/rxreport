@@ -29,7 +29,7 @@ async function fetchTopReactions(name: string, total: number): Promise<SideEffec
     limit: '20',
   })
   return data.results.map((r) => ({
-    name: r.term.toLowerCase(),
+    name: (r.term ?? '').toLowerCase(),
     count: r.count,
     percentage: Math.round((r.count / total) * 1000) / 10,
   }))
@@ -41,9 +41,10 @@ async function fetchTrend(name: string): Promise<TrendPoint[]> {
     count: 'receivedate',
   })
   const quarters: Record<string, number> = {}
-  data.results.forEach(({ term, count }) => {
-    const year = term.slice(0, 4)
-    const month = parseInt(term.slice(4, 6), 10)
+  data.results.forEach(({ time, count }) => {
+    if (!time) return
+    const year = time.slice(0, 4)
+    const month = parseInt(time.slice(4, 6), 10)
     const q = Math.ceil(month / 3)
     const key = `${year} Q${q}`
     quarters[key] = (quarters[key] ?? 0) + count
@@ -64,7 +65,7 @@ async function fetchAgeGroups(name: string): Promise<AgeGroup[]> {
     '0-17': 0, '18-44': 0, '45-64': 0, '65-74': 0, '75+': 0,
   }
   data.results.forEach(({ term, count }) => {
-    const age = parseInt(term, 10)
+    const age = parseInt(term ?? '', 10)
     if (age < 18) buckets['0-17'] += count
     else if (age < 45) buckets['18-44'] += count
     else if (age < 65) buckets['45-64'] += count
@@ -84,7 +85,7 @@ async function fetchGender(name: string): Promise<GenderBreakdown> {
     count: 'patient.patientsex',
   })
   const map: Record<string, number> = {}
-  data.results.forEach(({ term, count }) => { map[term] = count })
+  data.results.forEach(({ term, count }) => { if (term) map[term] = count })
   return {
     male: map['1'] ?? 0,
     female: map['2'] ?? 0,
@@ -129,5 +130,5 @@ export async function fetchTopDrugs(limit = 1000): Promise<string[]> {
     count: 'patient.drug.medicinalproduct.exact',
     limit: String(Math.min(limit, 1000)),
   })
-  return data.results.map((r) => r.term)
+  return data.results.map((r) => r.term ?? '').filter(Boolean)
 }

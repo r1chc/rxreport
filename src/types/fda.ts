@@ -1,7 +1,8 @@
 // Raw openFDA API response shapes
 
 export interface FDACountResult {
-  term: string
+  term?: string  // used for string fields (reactions, gender, etc.)
+  time?: string  // used for date fields (receivedate)
   count: number
 }
 
