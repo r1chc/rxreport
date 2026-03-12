@@ -20,13 +20,16 @@ async function getDrugList(): Promise<string[]> {
 
 async function fdaLookup(query: string): Promise<string[]> {
   try {
-    const url = `https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:"${encodeURIComponent(query.toUpperCase())}*"&count=patient.drug.medicinalproduct.exact&limit=8`
+    const upper = query.toUpperCase()
+    const url = `https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:${encodeURIComponent(upper)}*&count=patient.drug.medicinalproduct.exact&limit=50`
     const res = await fetch(url)
     if (!res.ok) return []
     const data = await res.json()
+    const lower = query.toLowerCase()
     return (data.results ?? [])
-      .map((r: { term: string }) => r.term.charAt(0) + r.term.slice(1).toLowerCase())
-      .filter((n: string) => n.toLowerCase().startsWith(query.toLowerCase()))
+      .map((r: { term: string }) => r.term.charAt(0).toUpperCase() + r.term.slice(1).toLowerCase())
+      .filter((n: string) => n.toLowerCase().startsWith(lower))
+      .slice(0, 8)
   } catch {
     return []
   }
