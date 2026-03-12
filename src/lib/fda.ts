@@ -14,19 +14,25 @@ function drugSearch(name: string) {
   return `patient.drug.medicinalproduct:"${name.toUpperCase()}"`
 }
 
-async function fetchTopReactions(name: string): Promise<{ reactions: SideEffect[]; total: number }> {
+async function fetchTotalCount(name: string): Promise<number> {
+  const data = await fdaFetch({
+    search: drugSearch(name),
+    limit: '1',
+  })
+  return data.meta.results.total
+}
+
+async function fetchTopReactions(name: string, total: number): Promise<SideEffect[]> {
   const data = await fdaFetch({
     search: drugSearch(name),
     count: 'patient.reaction.reactionmeddrapt.exact',
     limit: '20',
   })
-  const total = data.meta.results.total
-  const reactions: SideEffect[] = data.results.map((r) => ({
+  return data.results.map((r) => ({
     name: r.term.toLowerCase(),
     count: r.count,
     percentage: Math.round((r.count / total) * 1000) / 10,
   }))
-  return { reactions, total }
 }
 
 async function fetchTrend(name: string): Promise<TrendPoint[]> {
@@ -95,8 +101,9 @@ async function fetchSeriousCount(name: string): Promise<number> {
 }
 
 export async function fetchDrugReport(name: string): Promise<DrugReport> {
-  const [{ reactions, total }, trend, ageGroups, gender, seriousReports] = await Promise.all([
-    fetchTopReactions(name),
+  const total = await fetchTotalCount(name)
+  const [reactions, trend, ageGroups, gender, seriousReports] = await Promise.all([
+    fetchTopReactions(name, total),
     fetchTrend(name),
     fetchAgeGroups(name),
     fetchGender(name),
