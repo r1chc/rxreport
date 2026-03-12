@@ -88,7 +88,7 @@ async function fetchGender(name: string): Promise<GenderBreakdown> {
 
 async function fetchSeriousCount(name: string): Promise<number> {
   const data = await fdaFetch({
-    search: `${drugSearch(name)}+AND+serious:1`,
+    search: `${drugSearch(name)} AND serious:1`,
     limit: '1',
   })
   return data.meta.results.total
