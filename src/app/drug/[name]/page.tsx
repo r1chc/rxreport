@@ -1,35 +1,24 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 import { fetchDrugReport } from '@/lib/fda'
 import { getTopDrugSlugs, unslugify } from '@/lib/drug-list'
 import StatCard from '@/components/StatCard'
 import AdSlot from '@/components/AdSlot'
 import DrugSearchBar from '@/components/DrugSearchBar'
-import type { SideEffect, TrendPoint, AgeGroup, GenderBreakdown } from '@/types/fda'
-
-// Charts are client-only (Recharts needs window)
-const ChartSkeleton = () => <div className="h-64 bg-slate-100 rounded-xl animate-pulse" />
-const SideEffectsChart = dynamic<{ data: SideEffect[] }>(
-  () => import('@/components/SideEffectsChart'),
-  { ssr: false, loading: ChartSkeleton },
-)
-const TrendChart = dynamic<{ data: TrendPoint[] }>(
-  () => import('@/components/TrendChart'),
-  { ssr: false, loading: ChartSkeleton },
-)
-const DemographicsChart = dynamic<{ ageGroups: AgeGroup[]; gender: GenderBreakdown }>(
-  () => import('@/components/DemographicsChart'),
-  { ssr: false, loading: ChartSkeleton },
-)
+import DrugCharts from '@/components/DrugCharts'
 
 interface Props {
   params: Promise<{ name: string }>
 }
 
 export async function generateStaticParams() {
-  const slugs = await getTopDrugSlugs()
-  return slugs.map((name) => ({ name }))
+  try {
+    const slugs = await getTopDrugSlugs()
+    return slugs.map((name) => ({ name }))
+  } catch {
+    // FDA API unavailable at build time — pages will be generated on first request
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -87,25 +76,15 @@ export default async function DrugPage({ params }: Props) {
             <StatCard label="Non-Serious" value={report.nonSeriousReports} variant="success" />
           </div>
 
-          {/* Side Effects */}
-          <section className="mb-8">
-            <h2 className="text-lg font-semibold mb-3">Top Reported Side Effects</h2>
-            <SideEffectsChart data={report.topSideEffects} />
-          </section>
+          {/* Charts (client component — Recharts needs window) */}
+          <DrugCharts
+            topSideEffects={report.topSideEffects}
+            trend={report.trend}
+            ageGroups={report.ageGroups}
+            gender={report.gender}
+          />
 
           <AdSlot slot="0987654321" format="leaderboard" className="mb-8" />
-
-          {/* Trend */}
-          <section className="mb-8">
-            <h2 className="text-lg font-semibold mb-3">Reports Over Time</h2>
-            <TrendChart data={report.trend} />
-          </section>
-
-          {/* Demographics */}
-          <section className="mb-8">
-            <h2 className="text-lg font-semibold mb-3">Who Is Reporting?</h2>
-            <DemographicsChart ageGroups={report.ageGroups} gender={report.gender} />
-          </section>
 
           {/* Compare CTA */}
           <section className="bg-blue-50 rounded-xl p-5 mb-8">

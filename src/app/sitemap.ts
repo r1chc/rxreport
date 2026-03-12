@@ -2,7 +2,12 @@ import type { MetadataRoute } from 'next'
 import { getTopDrugSlugs } from '@/lib/drug-list'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const drugSlugs = await getTopDrugSlugs()
+  let drugSlugs: string[] = []
+  try {
+    drugSlugs = await getTopDrugSlugs()
+  } catch {
+    // FDA API unavailable — omit drug pages from sitemap this build
+  }
   const now = new Date()
 
   const staticPages: MetadataRoute.Sitemap = [
