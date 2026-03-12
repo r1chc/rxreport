@@ -13,7 +13,7 @@ let cachedDrugs: string[] | null = null
 
 async function getDrugList(): Promise<string[]> {
   if (cachedDrugs) return cachedDrugs
-  const res = await fetch('/api/drugs')
+  const res = await fetch('/drug-list.json')
   cachedDrugs = await res.json()
   return cachedDrugs!
 }
