@@ -23,7 +23,7 @@ export default function TrendChart({ data }: Props) {
           />
           <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => v.toLocaleString()} />
           <Tooltip
-            formatter={(v: number) => [v.toLocaleString(), 'Reports']}
+            formatter={(v) => [Number(v).toLocaleString(), 'Reports']}
             contentStyle={{ fontSize: 12 }}
           />
           <Line

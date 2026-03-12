@@ -1,6 +1,7 @@
 'use client'
 
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import type { PieLabelRenderProps } from 'recharts'
 import type { AgeGroup, GenderBreakdown } from '@/types/fda'
 
 interface Props {
@@ -32,14 +33,14 @@ export default function DemographicsChart({ ageGroups, gender }: Props) {
               cx="50%"
               cy="50%"
               outerRadius={70}
-              label={({ label, percentage }: { label: string; percentage: number }) => `${label} (${percentage}%)`}
+              label={(props: PieLabelRenderProps & { label?: string; percentage?: number }) => `${props.label ?? ''} (${props.percentage ?? 0}%)`}
               labelLine={false}
             >
               {ageGroups.map((_, i) => (
                 <Cell key={i} fill={AGE_COLORS[i % AGE_COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip formatter={(v: number) => v.toLocaleString()} contentStyle={{ fontSize: 12 }} />
+            <Tooltip formatter={(v) => Number(v).toLocaleString()} contentStyle={{ fontSize: 12 }} />
           </PieChart>
         </ResponsiveContainer>
       </div>
@@ -61,7 +62,7 @@ export default function DemographicsChart({ ageGroups, gender }: Props) {
                 <Cell key={i} fill={GENDER_COLORS[i % GENDER_COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip formatter={(v: number) => v.toLocaleString()} contentStyle={{ fontSize: 12 }} />
+            <Tooltip formatter={(v) => Number(v).toLocaleString()} contentStyle={{ fontSize: 12 }} />
             <Legend />
           </PieChart>
         </ResponsiveContainer>

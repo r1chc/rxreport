@@ -32,7 +32,7 @@ export default function SideEffectsChart({ data }: Props) {
             tick={{ fontSize: 12 }}
           />
           <Tooltip
-            formatter={(value: number) => [`${value}%`, 'Reports']}
+            formatter={(value) => [`${value}%`, 'Reports']}
             contentStyle={{ fontSize: 12 }}
           />
           <Bar dataKey="percentage" radius={[0, 4, 4, 0]}>
