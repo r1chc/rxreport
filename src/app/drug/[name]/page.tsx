@@ -16,7 +16,6 @@ export async function generateStaticParams() {
     const slugs = await getTopDrugSlugs()
     return slugs.map((name) => ({ name }))
   } catch {
-    // FDA API unavailable at build time — pages will be generated on first request
     return []
   }
 }
@@ -53,19 +52,19 @@ export default async function DrugPage({ params }: Props) {
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
       {/* Breadcrumb */}
-      <nav className="text-sm text-slate-400 mb-6" aria-label="Breadcrumb">
-        <a href="/" className="hover:text-slate-600">Home</a>
+      <nav className="text-sm text-gray-400 mb-6" aria-label="Breadcrumb">
+        <a href="/" className="hover:text-gray-600">Home</a>
         {' / '}
-        <a href="/top-drugs" className="hover:text-slate-600">Top Drugs</a>
+        <a href="/top-drugs" className="hover:text-gray-600">Top Drugs</a>
         {' / '}
-        <span className="text-slate-700">{displayName}</span>
+        <span style={{ color: '#1a3c34' }} className="font-medium">{displayName}</span>
       </nav>
 
       <div className="flex gap-8">
         <div className="flex-1 min-w-0">
           {/* Header */}
-          <h1 className="text-3xl font-bold mb-1">{displayName}</h1>
-          <p className="text-slate-400 text-sm mb-6">
+          <h1 className="text-3xl font-bold mb-1" style={{ color: '#1a3c34' }}>{displayName}</h1>
+          <p className="text-gray-500 text-sm mb-6">
             {report.totalReports.toLocaleString()} FDA adverse event reports · Last updated {report.lastUpdated}
           </p>
 
@@ -76,7 +75,7 @@ export default async function DrugPage({ params }: Props) {
             <StatCard label="Non-Serious" value={report.nonSeriousReports} variant="success" />
           </div>
 
-          {/* Charts (client component — Recharts needs window) */}
+          {/* Charts */}
           <DrugCharts
             topSideEffects={report.topSideEffects}
             trend={report.trend}
@@ -87,11 +86,11 @@ export default async function DrugPage({ params }: Props) {
           <AdSlot slot="0987654321" format="leaderboard" className="mb-8" />
 
           {/* Compare CTA */}
-          <section className="bg-blue-50 rounded-xl p-5 mb-8">
-            <h2 className="font-semibold mb-2">⚖️ Compare with another drug</h2>
+          <section className="rounded-xl p-5 mb-8 border" style={{ background: '#f0fdf4', borderColor: '#bbf7d0' }}>
+            <h2 className="font-semibold mb-2 text-gray-800">Compare with another drug</h2>
             <DrugSearchBar />
-            <p className="text-xs text-slate-400 mt-2">
-              Or go to <a href={`/compare?a=${name}`} className="text-blue-600 hover:underline">the compare page</a>.
+            <p className="text-xs text-gray-400 mt-2">
+              Or go to <a href={`/compare?a=${name}`} className="hover:underline" style={{ color: '#1a3c34' }}>the compare page</a>.
             </p>
           </section>
         </div>

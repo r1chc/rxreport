@@ -18,11 +18,11 @@ export default function SeverityFilter({ value, onChange }: SeverityFilterProps)
         <button
           key={opt.value}
           onClick={() => onChange(opt.value)}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            value === opt.value
-              ? 'bg-blue-600 text-white'
-              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-          }`}
+          className="px-4 py-1.5 rounded-full text-sm font-medium transition-colors border"
+          style={value === opt.value
+            ? { background: '#1a3c34', color: 'white', borderColor: '#1a3c34' }
+            : { background: 'white', color: '#374151', borderColor: '#d1d5db' }
+          }
           aria-pressed={value === opt.value}
         >
           {opt.label}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RxReport Theme Options</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  .theme-label { font-family: monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+</style>
+</head>
+<body class="bg-zinc-100 p-8 space-y-16">
+
+<h1 class="text-2xl font-bold text-zinc-800 mb-2">RxReport — Theme Options</h1>
+<p class="text-zinc-500 text-sm mb-12">Each preview shows: nav, hero, stat cards, and a drug page header snippet.</p>
+
+<!-- ─────────────────────────────────────────────────────────── -->
+<!-- OPTION 1: Clinical / Professional -->
+<!-- ─────────────────────────────────────────────────────────── -->
+<div>
+  <div class="theme-label text-zinc-400 mb-3">Option 1 — Clinical / Professional</div>
+  <div class="rounded-2xl overflow-hidden shadow-xl border border-zinc-200" style="font-family: 'IBM Plex Sans', sans-serif;">
+
+    <!-- Nav -->
+    <nav style="background:#0a1628; color:white;" class="px-6 py-3 flex items-center gap-6">
+      <span class="font-bold text-lg tracking-tight" style="color:#60a5fa;">Rx<span style="color:white;">Report</span></span>
+      <span class="text-sm opacity-60 hover:opacity-100 cursor-pointer">Top Drugs</span>
+      <span class="text-sm opacity-60 hover:opacity-100 cursor-pointer">Compare</span>
+      <span class="text-sm opacity-60 hover:opacity-100 cursor-pointer">About</span>
+    </nav>
+
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,#0a1628 0%,#1e3a5f 100%); color:white;" class="px-8 py-14 text-center">
+      <div class="inline-block text-xs font-semibold tracking-widest uppercase mb-4 px-3 py-1 rounded-full" style="background:rgba(96,165,250,.15); color:#93c5fd;">FDA Adverse Event Data</div>
+      <h1 class="text-4xl font-bold mb-3 tracking-tight">Drug Safety, By The Numbers</h1>
+      <p class="text-base mb-8 max-w-lg mx-auto" style="color:#94a3b8;">Search any drug to see official FDA adverse event data — side effects, trends, and demographics visualized.</p>
+      <div class="flex justify-center">
+        <div class="flex items-center gap-2 rounded-lg px-4 py-3 w-80 text-sm" style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); color:#cbd5e1;">
+          <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          Search a drug name…
+        </div>
+      </div>
+    </div>
+
+    <!-- Drug page preview -->
+    <div style="background:#f8fafc;" class="px-8 py-8">
+      <div class="text-xs text-slate-400 mb-4">Home / Top Drugs / <span style="color:#0a1628;">Ozempic</span></div>
+      <h2 class="text-2xl font-bold mb-1" style="color:#0a1628;">Ozempic</h2>
+      <p class="text-sm mb-6" style="color:#64748b;">54,647 FDA adverse event reports · Last updated 2026-01-27</p>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="rounded-xl p-5" style="background:white; border:1px solid #e2e8f0;">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:#64748b;">Total Reports</div>
+          <div class="text-2xl font-bold" style="color:#0a1628;">54,647</div>
+        </div>
+        <div class="rounded-xl p-5" style="background:white; border:1px solid #fee2e2;">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:#ef4444;">Serious</div>
+          <div class="text-2xl font-bold" style="color:#b91c1c;">27,374</div>
+        </div>
+        <div class="rounded-xl p-5" style="background:white; border:1px solid #dcfce7;">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:#16a34a;">Non-Serious</div>
+          <div class="text-2xl font-bold" style="color:#15803d;">27,273</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="text-xs text-zinc-400 mt-2 ml-1">Colors: Navy #0a1628 · Steel blue accent · IBM Plex Sans · Clean borders, white cards</p>
+</div>
+
+
+<!-- ─────────────────────────────────────────────────────────── -->
+<!-- OPTION 2: Modern Consumer Health -->
+<!-- ─────────────────────────────────────────────────────────── -->
+<div>
+  <div class="theme-label text-zinc-400 mb-3">Option 2 — Modern Consumer Health</div>
+  <div class="rounded-2xl overflow-hidden shadow-xl border border-zinc-200" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+
+    <!-- Nav -->
+    <nav style="background:white; border-bottom:1px solid #f1f5f9;" class="px-6 py-3 flex items-center gap-6">
+      <span class="font-bold text-lg" style="color:#7c3aed;">rx<span style="color:#0ea5e9;">report</span></span>
+      <span class="text-sm text-slate-500 cursor-pointer hover:text-slate-800">Top Drugs</span>
+      <span class="text-sm text-slate-500 cursor-pointer hover:text-slate-800">Compare</span>
+      <span class="text-sm text-slate-500 cursor-pointer hover:text-slate-800">About</span>
+      <div class="ml-auto">
+        <span class="text-xs font-semibold px-3 py-1.5 rounded-full" style="background:#f0fdf4; color:#16a34a;">Free & open data</span>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div style="background:linear-gradient(160deg,#faf5ff 0%,#eff6ff 50%,#f0f9ff 100%);" class="px-8 py-14 text-center">
+      <h1 class="text-4xl font-bold mb-3" style="color:#1e1b4b;">What are people reporting<br>about <span style="color:#7c3aed;">your medication?</span></h1>
+      <p class="text-base mb-8 max-w-md mx-auto" style="color:#64748b;">Real FDA adverse event data for any drug — side effects, trends, and who's reporting them.</p>
+      <div class="flex justify-center gap-2">
+        <div class="flex items-center gap-2 rounded-2xl px-4 py-3 w-72 text-sm shadow-sm" style="background:white; border:2px solid #7c3aed20; color:#94a3b8;">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          e.g. Ozempic, Adderall…
+        </div>
+        <button class="rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-md" style="background:linear-gradient(135deg,#7c3aed,#0ea5e9);">Search</button>
+      </div>
+      <div class="flex justify-center gap-6 mt-8 text-xs" style="color:#94a3b8;">
+        <span>✓ Official FDA data</span>
+        <span>✓ Free forever</span>
+        <span>✓ Updated weekly</span>
+      </div>
+    </div>
+
+    <!-- Drug page preview -->
+    <div style="background:#fafafa;" class="px-8 py-8">
+      <div class="text-xs mb-4" style="color:#a78bfa;">← Back to search</div>
+      <div class="flex items-start justify-between mb-6">
+        <div>
+          <h2 class="text-2xl font-bold mb-1" style="color:#1e1b4b;">Ozempic</h2>
+          <p class="text-sm" style="color:#94a3b8;">Semaglutide · 54,647 reports · Updated Jan 2026</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:#fef3c7; color:#d97706;">High report volume</span>
+      </div>
+      <div class="grid grid-cols-3 gap-3">
+        <div class="rounded-2xl p-5" style="background:white; box-shadow:0 1px 3px rgba(0,0,0,.06);">
+          <div class="text-xs font-medium mb-1" style="color:#94a3b8;">Total Reports</div>
+          <div class="text-2xl font-bold" style="color:#1e1b4b;">54,647</div>
+          <div class="text-xs mt-1" style="color:#7c3aed;">↑ 12% this year</div>
+        </div>
+        <div class="rounded-2xl p-5" style="background:white; box-shadow:0 1px 3px rgba(0,0,0,.06);">
+          <div class="text-xs font-medium mb-1" style="color:#94a3b8;">Serious</div>
+          <div class="text-2xl font-bold" style="color:#ef4444;">27,374</div>
+          <div class="text-xs mt-1" style="color:#94a3b8;">50% of reports</div>
+        </div>
+        <div class="rounded-2xl p-5" style="background:white; box-shadow:0 1px 3px rgba(0,0,0,.06);">
+          <div class="text-xs font-medium mb-1" style="color:#94a3b8;">Non-Serious</div>
+          <div class="text-2xl font-bold" style="color:#16a34a;">27,273</div>
+          <div class="text-xs mt-1" style="color:#94a3b8;">50% of reports</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="text-xs text-zinc-400 mt-2 ml-1">Colors: Violet #7c3aed · Sky blue #0ea5e9 · Plus Jakarta Sans · Rounded-2xl, soft shadows, gradient hero</p>
+</div>
+
+
+<!-- ─────────────────────────────────────────────────────────── -->
+<!-- OPTION 3: Data-Forward / Dark Mode -->
+<!-- ─────────────────────────────────────────────────────────── -->
+<div>
+  <div class="theme-label text-zinc-400 mb-3">Option 3 — Data-Forward / Dark Mode</div>
+  <div class="rounded-2xl overflow-hidden shadow-xl border border-zinc-800" style="font-family: 'DM Sans', sans-serif;">
+
+    <!-- Nav -->
+    <nav style="background:#09090b; border-bottom:1px solid #27272a;" class="px-6 py-3 flex items-center gap-6">
+      <span class="font-bold text-lg" style="color:#22d3ee;">RxReport</span>
+      <span class="text-sm cursor-pointer" style="color:#71717a;">Top Drugs</span>
+      <span class="text-sm cursor-pointer" style="color:#71717a;">Compare</span>
+      <span class="text-sm cursor-pointer" style="color:#71717a;">About</span>
+      <div class="ml-auto text-xs px-2 py-1 rounded" style="background:#27272a; color:#22d3ee; font-family:monospace;">FAERS live data</div>
+    </nav>
+
+    <!-- Hero -->
+    <div style="background:#09090b;" class="px-8 py-14 text-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5" style="background:radial-gradient(circle at 50% 0%, #22d3ee, transparent 60%);"></div>
+      <div class="relative">
+        <div class="text-xs tracking-widest uppercase mb-4" style="color:#22d3ee; font-family:monospace;">openFDA · FAERS Database</div>
+        <h1 class="text-4xl font-bold mb-3" style="color:white;">Adverse Event Intelligence<br>for Any Drug</h1>
+        <p class="text-base mb-8 max-w-md mx-auto" style="color:#71717a;">FDA report data visualized. Side effects, time series, demographics — all from FAERS.</p>
+        <div class="flex justify-center">
+          <div class="flex items-center gap-2 px-4 py-3 w-80 text-sm rounded-lg" style="background:#18181b; border:1px solid #3f3f46; color:#52525b;">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <span>Search a drug…</span>
+            <span class="ml-auto text-xs px-1.5 py-0.5 rounded" style="background:#27272a; color:#52525b;">⌘K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drug page preview -->
+    <div style="background:#09090b; border-top:1px solid #27272a;" class="px-8 py-8">
+      <div class="text-xs mb-4" style="color:#3f3f46; font-family:monospace;">/ top-drugs / ozempic</div>
+      <h2 class="text-2xl font-bold mb-1" style="color:white;">OZEMPIC</h2>
+      <p class="text-sm mb-6" style="color:#52525b;">54,647 reports · semaglutide · Updated 2026-01-27</p>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="rounded-xl p-5" style="background:#18181b; border:1px solid #27272a;">
+          <div class="text-xs mb-1" style="color:#52525b; font-family:monospace;">TOTAL_REPORTS</div>
+          <div class="text-2xl font-bold" style="color:#22d3ee;">54,647</div>
+        </div>
+        <div class="rounded-xl p-5" style="background:#18181b; border:1px solid #27272a;">
+          <div class="text-xs mb-1" style="color:#52525b; font-family:monospace;">SERIOUS</div>
+          <div class="text-2xl font-bold" style="color:#f87171;">27,374</div>
+        </div>
+        <div class="rounded-xl p-5" style="background:#18181b; border:1px solid #27272a;">
+          <div class="text-xs mb-1" style="color:#52525b; font-family:monospace;">NON_SERIOUS</div>
+          <div class="text-2xl font-bold" style="color:#4ade80;">27,273</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="text-xs text-zinc-400 mt-2 ml-1">Colors: Zinc-950 bg · Cyan #22d3ee accent · DM Sans · Terminal aesthetic, monospace labels</p>
+</div>
+
+
+<!-- ─────────────────────────────────────────────────────────── -->
+<!-- OPTION 4: Trustworthy / Authoritative -->
+<!-- ─────────────────────────────────────────────────────────── -->
+<div>
+  <div class="theme-label text-zinc-400 mb-3">Option 4 — Trustworthy / Authoritative</div>
+  <div class="rounded-2xl overflow-hidden shadow-xl border border-zinc-200" style="font-family: 'Inter', sans-serif;">
+
+    <!-- Nav -->
+    <nav style="background:#1a3c34; color:white;" class="px-6 py-3 flex items-center gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded" style="background:#d1fae5; display:flex; align-items:center; justify-content:center;">
+          <span style="color:#1a3c34; font-size:10px; font-weight:800;">Rx</span>
+        </div>
+        <span class="font-semibold text-base tracking-tight">RxReport</span>
+      </div>
+      <span class="text-sm opacity-60 cursor-pointer">Top Drugs</span>
+      <span class="text-sm opacity-60 cursor-pointer">Compare</span>
+      <span class="text-sm opacity-60 cursor-pointer">About</span>
+      <div class="ml-auto flex items-center gap-1.5 text-xs" style="color:#6ee7b7;">
+        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        Official FDA Data
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,#1a3c34 0%,#14532d 100%);" class="px-8 py-14 text-center">
+      <div class="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full mb-6" style="background:rgba(209,250,229,.1); color:#6ee7b7; border:1px solid rgba(209,250,229,.2);">
+        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        Sourced directly from FDA FAERS database
+      </div>
+      <h1 class="text-4xl font-bold mb-3 tracking-tight" style="color:white;">Know What the FDA Knows<br>About Your Drug</h1>
+      <p class="text-base mb-8 max-w-lg mx-auto" style="color:#a7f3d0;">Transparent, unfiltered adverse event data. The same reports regulators, researchers, and physicians rely on.</p>
+      <div class="flex justify-center gap-3">
+        <div class="flex items-center gap-2 rounded-lg px-4 py-3 w-72 text-sm" style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#d1fae5;">
+          <svg class="w-4 h-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          Search any drug name…
+        </div>
+        <button class="px-5 py-3 rounded-lg text-sm font-semibold" style="background:#d1fae5; color:#1a3c34;">Look up →</button>
+      </div>
+    </div>
+
+    <!-- Drug page preview -->
+    <div style="background:#f9fafb;" class="px-8 py-8">
+      <div class="flex items-center gap-2 text-xs text-slate-400 mb-5">
+        <span>Home</span><span>/</span><span>Top Drugs</span><span>/</span><span style="color:#1a3c34;">Ozempic</span>
+      </div>
+      <div class="flex items-start gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl font-bold mb-0.5" style="color:#1a3c34;">Ozempic</h2>
+          <p class="text-sm" style="color:#6b7280;">54,647 adverse event reports · Source: FDA FAERS · Updated Jan 27, 2026</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="rounded-xl p-5" style="background:white; border-left:3px solid #1a3c34; box-shadow:0 1px 2px rgba(0,0,0,.04);">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:#6b7280;">Total Reports</div>
+          <div class="text-2xl font-bold" style="color:#1a3c34;">54,647</div>
+        </div>
+        <div class="rounded-xl p-5" style="background:white; border-left:3px solid #dc2626; box-shadow:0 1px 2px rgba(0,0,0,.04);">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:#6b7280;">Serious</div>
+          <div class="text-2xl font-bold" style="color:#dc2626;">27,374</div>
+        </div>
+        <div class="rounded-xl p-5" style="background:white; border-left:3px solid #16a34a; box-shadow:0 1px 2px rgba(0,0,0,.04);">
+          <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:#6b7280;">Non-Serious</div>
+          <div class="text-2xl font-bold" style="color:#16a34a;">27,273</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="text-xs text-zinc-400 mt-2 ml-1">Colors: Forest green #1a3c34 · Mint accent #d1fae5 · Inter · Left-bordered cards, government-adjacent feel</p>
+</div>
+
+</body>
+</html>

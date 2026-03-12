@@ -4,25 +4,28 @@ interface StatCardProps {
   variant?: 'default' | 'danger' | 'success'
 }
 
-const variantStyles = {
-  default: 'bg-slate-50 border-slate-200',
-  danger: 'bg-red-50 border-red-200',
-  success: 'bg-green-50 border-green-200',
+const borderColors = {
+  default: '#1a3c34',
+  danger: '#dc2626',
+  success: '#16a34a',
 }
 
-const valueStyles = {
-  default: 'text-slate-900',
-  danger: 'text-red-600',
-  success: 'text-green-600',
+const valueColors = {
+  default: '#1a3c34',
+  danger: '#dc2626',
+  success: '#16a34a',
 }
 
 export default function StatCard({ label, value, variant = 'default' }: StatCardProps) {
   return (
-    <div className={`rounded-lg border p-4 text-center ${variantStyles[variant]}`}>
-      <div className={`text-2xl font-bold ${valueStyles[variant]}`}>
+    <div
+      className="bg-white rounded-xl p-5 shadow-sm"
+      style={{ borderLeft: `3px solid ${borderColors[variant]}`, border: '1px solid #e5e7eb', borderLeftWidth: '3px', borderLeftColor: borderColors[variant] }}
+    >
+      <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">{label}</div>
+      <div className="text-2xl font-bold" style={{ color: valueColors[variant] }}>
         {value.toLocaleString()}
       </div>
-      <div className="text-sm text-slate-500 mt-1">{label}</div>
     </div>
   )
 }
