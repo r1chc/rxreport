@@ -132,3 +132,16 @@ export async function fetchTopDrugs(limit = 1000): Promise<string[]> {
   })
   return data.results.map((r) => r.term ?? '').filter(Boolean)
 }
+
+export async function fetchTrendingDrugs(limit = 10): Promise<{ name: string; count: number }[]> {
+  const data = await fdaFetch({
+    count: 'patient.drug.medicinalproduct.exact',
+    limit: String(limit),
+  })
+  return data.results
+    .filter((r) => r.term)
+    .map((r) => ({
+      name: r.term!.charAt(0).toUpperCase() + r.term!.slice(1).toLowerCase(),
+      count: r.count,
+    }))
+}
