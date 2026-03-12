@@ -7,16 +7,29 @@ interface Props {
   data: SideEffect[]
 }
 
+// Capitalize each word, truncate if too long
+function formatLabel(name: string, maxLen = 32): string {
+  const titled = name.replace(/\b\w/g, (c) => c.toUpperCase())
+  return titled.length > maxLen ? titled.slice(0, maxLen - 1) + '…' : titled
+}
+
+// Estimate pixel width needed for the longest label
+function getLabelWidth(data: SideEffect[]): number {
+  const longest = Math.max(...data.map((d) => formatLabel(d.name).length))
+  return Math.min(Math.max(longest * 7, 120), 240)
+}
+
 export default function SideEffectsChart({ data }: Props) {
   const sorted = [...data].sort((a, b) => b.count - a.count).slice(0, 15)
+  const labelWidth = getLabelWidth(sorted)
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-4">
-      <ResponsiveContainer width="100%" height={400}>
+    <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+      <ResponsiveContainer width="100%" height={420}>
         <BarChart
           data={sorted}
           layout="vertical"
-          margin={{ top: 0, right: 60, left: 120, bottom: 0 }}
+          margin={{ top: 0, right: 50, left: 8, bottom: 0 }}
         >
           <CartesianGrid strokeDasharray="3 3" horizontal={false} />
           <XAxis
@@ -28,24 +41,28 @@ export default function SideEffectsChart({ data }: Props) {
           <YAxis
             type="category"
             dataKey="name"
-            width={115}
-            tick={{ fontSize: 12 }}
+            width={labelWidth}
+            tickFormatter={(name) => formatLabel(name)}
+            tick={{ fontSize: 11, fill: '#374151' }}
           />
           <Tooltip
-            formatter={(value) => [`${value}%`, 'Reports']}
+            formatter={(value, _, props) => [
+              `${value}% (${props.payload.count.toLocaleString()} reports)`,
+              formatLabel(props.payload.name),
+            ]}
             contentStyle={{ fontSize: 12 }}
           />
           <Bar dataKey="percentage" radius={[0, 4, 4, 0]}>
             {sorted.map((entry, index) => (
               <Cell
                 key={entry.name}
-                fill={index < 5 ? '#3b82f6' : index < 10 ? '#93c5fd' : '#dbeafe'}
+                fill={index < 5 ? '#1a3c34' : index < 10 ? '#4ade80' : '#bbf7d0'}
               />
             ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <p className="text-xs text-slate-400 mt-2 text-center">
+      <p className="text-xs text-gray-400 mt-2 text-center">
         Percentage of all reports mentioning this reaction
       </p>
     </div>

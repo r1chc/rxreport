@@ -18,6 +18,20 @@ async function getDrugList(): Promise<string[]> {
   return cachedDrugs!
 }
 
+async function fdaLookup(query: string): Promise<string[]> {
+  try {
+    const url = `https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:"${encodeURIComponent(query.toUpperCase())}*"&count=patient.drug.medicinalproduct.exact&limit=8`
+    const res = await fetch(url)
+    if (!res.ok) return []
+    const data = await res.json()
+    return (data.results ?? [])
+      .map((r: { term: string }) => r.term.charAt(0) + r.term.slice(1).toLowerCase())
+      .filter((n: string) => n.toLowerCase().startsWith(query.toLowerCase()))
+  } catch {
+    return []
+  }
+}
+
 export default function DrugSearchBar({ size = 'default', initialValue = '' }: DrugSearchBarProps) {
   const [query, setQuery] = useState(initialValue)
   const [suggestions, setSuggestions] = useState<string[]>([])
@@ -47,13 +61,15 @@ export default function DrugSearchBar({ size = 'default', initialValue = '' }: D
     }
     const drugs = await getDrugList()
     const lower = value.toLowerCase()
-    const matches = drugs
-      .filter((d) => d.toLowerCase().startsWith(lower))
-      .slice(0, 8)
-    // If nothing starts with it, fall back to "contains"
-    const results = matches.length > 0
-      ? matches
-      : drugs.filter((d) => d.toLowerCase().includes(lower)).slice(0, 8)
+    const startMatches = drugs.filter((d) => d.toLowerCase().startsWith(lower)).slice(0, 8)
+    const containsMatches = drugs.filter((d) => d.toLowerCase().includes(lower)).slice(0, 8)
+    const staticResults = startMatches.length > 0 ? startMatches : containsMatches
+
+    // Fall back to live FDA API if static list has fewer than 2 matches
+    const results = staticResults.length >= 2
+      ? staticResults
+      : await fdaLookup(value)
+
     setSuggestions(results)
     setOpen(results.length > 0)
   }
