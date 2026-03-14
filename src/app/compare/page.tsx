@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { fetchDrugReport } from '@/lib/fda'
 import { unslugify } from '@/lib/drug-list'
-import DrugSearchBar from '@/components/DrugSearchBar'
 import AdSlot from '@/components/AdSlot'
 import DrugComparison from '@/components/DrugComparison'
+import CompareInputs from '@/components/CompareInputs'
 
 interface Props {
   searchParams: Promise<{ a?: string; b?: string }>
@@ -23,8 +23,15 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   }
 }
 
+function sanitizeSlug(value: string | undefined): string {
+  const trimmed = (value ?? '').trim()
+  return trimmed.length > 0 && trimmed.length <= 200 ? trimmed : ''
+}
+
 export default async function ComparePage({ searchParams }: Props) {
-  const { a: slugA, b: slugB } = await searchParams
+  const { a, b } = await searchParams
+  const slugA = sanitizeSlug(a)
+  const slugB = sanitizeSlug(b)
 
   let reportA = null
   let reportB = null
@@ -43,16 +50,7 @@ export default async function ComparePage({ searchParams }: Props) {
         Enter two drug names to see their FDA adverse event reports side by side.
       </p>
 
-      <div className="flex gap-4 mb-8 flex-wrap">
-        <div className="flex-1">
-          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Drug A</label>
-          <DrugSearchBar initialValue={slugA ?? ''} />
-        </div>
-        <div className="flex-1">
-          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Drug B</label>
-          <DrugSearchBar initialValue={slugB ?? ''} />
-        </div>
-      </div>
+      <CompareInputs slugA={slugA ?? ''} slugB={slugB ?? ''} />
 
       {reportA && reportB ? (
         <DrugComparison reportA={reportA} reportB={reportB} />

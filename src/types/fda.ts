@@ -46,6 +46,40 @@ export interface GenderBreakdown {
   unknown: number
 }
 
+export interface BreakdownItem {
+  label: string
+  count: number
+  percentage: number
+}
+
+export interface SeriousnessBreakdown {
+  death: number
+  hospitalization: number
+  lifeThreatening: number
+  disabling: number
+  congenitalAnomali: number
+}
+
+export interface DrugLabel {
+  hasBlackBoxWarning: boolean
+  blackBoxWarning: string | null
+  warnings: string | null
+  contraindications: string | null
+  indicationsAndUsage: string | null
+  pharmClass: string[]      // e.g. ["HMG-CoA Reductase Inhibitor"]
+  brandNames: string[]
+  genericNames: string[]
+  manufacturer: string | null
+}
+
+export interface RisingDrug {
+  name: string
+  slug: string
+  currentYearCount: number
+  priorYearCount: number
+  percentChange: number
+}
+
 export interface DrugReport {
   name: string
   totalReports: number
@@ -55,5 +89,12 @@ export interface DrugReport {
   trend: TrendPoint[]
   ageGroups: AgeGroup[]
   gender: GenderBreakdown
+  seriousnessBreakdown: SeriousnessBreakdown
+  outcomes: BreakdownItem[]
+  indications: BreakdownItem[]
+  reporterTypes: BreakdownItem[]
+  countries: BreakdownItem[]
+  actionTaken: BreakdownItem[]
+  routes: BreakdownItem[]
   lastUpdated: string
 }

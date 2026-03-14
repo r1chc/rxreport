@@ -19,3 +19,10 @@ body {
 .drug-pill:hover {
   background: #d1fae5;
 }
+
+@media print {
+  nav, footer, .print-hide { display: none !important; }
+  body { background: white !important; }
+  * { box-shadow: none !important; }
+  .max-w-5xl { max-width: 100% !important; }
+}

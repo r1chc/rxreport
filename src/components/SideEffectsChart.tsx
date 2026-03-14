@@ -16,7 +16,7 @@ function formatLabel(name: string, maxLen = 32): string {
 // Estimate pixel width needed for the longest label
 function getLabelWidth(data: SideEffect[]): number {
   const longest = Math.max(...data.map((d) => formatLabel(d.name).length))
-  return Math.min(Math.max(longest * 7, 120), 240)
+  return Math.min(Math.max(longest * 7, 120), 200)
 }
 
 export default function SideEffectsChart({ data }: Props) {
@@ -24,18 +24,18 @@ export default function SideEffectsChart({ data }: Props) {
   const labelWidth = getLabelWidth(sorted)
 
   return (
-    <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+    <div>
       <ResponsiveContainer width="100%" height={420}>
         <BarChart
           data={sorted}
           layout="vertical"
-          margin={{ top: 0, right: 50, left: 8, bottom: 0 }}
+          margin={{ top: 0, right: 4, left: 0, bottom: 0 }}
         >
           <CartesianGrid strokeDasharray="3 3" horizontal={false} />
           <XAxis
             type="number"
             tickFormatter={(v) => `${v}%`}
-            domain={[0, 'dataMax']}
+            domain={[0, (dataMax: number) => parseFloat((Math.ceil(dataMax * 10) / 10).toFixed(1))]}
             tick={{ fontSize: 11 }}
           />
           <YAxis

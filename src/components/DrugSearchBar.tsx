@@ -7,6 +7,7 @@ import { slugify } from '@/lib/drug-list'
 interface DrugSearchBarProps {
   size?: 'default' | 'large'
   initialValue?: string
+  onSelect?: (slug: string) => void
 }
 
 let cachedDrugs: string[] | null = null
@@ -35,7 +36,7 @@ async function fdaLookup(query: string): Promise<string[]> {
   }
 }
 
-export default function DrugSearchBar({ size = 'default', initialValue = '' }: DrugSearchBarProps) {
+export default function DrugSearchBar({ size = 'default', initialValue = '', onSelect }: DrugSearchBarProps) {
   const [query, setQuery] = useState(initialValue)
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [activeIndex, setActiveIndex] = useState(-1)
@@ -80,7 +81,8 @@ export default function DrugSearchBar({ size = 'default', initialValue = '' }: D
   function navigate(drug: string) {
     setQuery(drug)
     setOpen(false)
-    router.push(`/drug/${slugify(drug)}`)
+    const slug = slugify(drug)
+    if (onSelect) { onSelect(slug) } else { router.push(`/drug/${slug}`) }
   }
 
   function handleSubmit(e: FormEvent) {
@@ -89,7 +91,7 @@ export default function DrugSearchBar({ size = 'default', initialValue = '' }: D
     const slug = slugify(target)
     if (slug) {
       setOpen(false)
-      router.push(`/drug/${slug}`)
+      if (onSelect) { onSelect(slug) } else { router.push(`/drug/${slug}`) }
     }
   }
 
