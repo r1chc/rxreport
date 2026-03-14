@@ -110,7 +110,7 @@ export async function GET(req: Request) {
       await new Promise((r) => setTimeout(r, 300))
     }
   } catch (err) {
-    console.error('Sync error:', err)
+    console.error('Sync error:', err instanceof Error ? err.message : 'unknown error')
     return NextResponse.json({ error: 'Internal sync error' }, { status: 500 })
   }
 
