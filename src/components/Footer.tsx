@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer style={{ background: '#2d5a4a' }}>
       <div
-        className="max-w-5xl mx-auto px-6 pt-6 pb-12 flex flex-col md:flex-row items-center justify-between gap-3"
+        className="max-w-5xl mx-auto px-6 pt-6 pb-20 md:pb-12 flex flex-col md:flex-row items-center justify-between gap-3"
         style={{ borderTop: '1px solid rgba(110,231,183,0.2)' }}
       >
         <p className="text-sm" style={{ color: '#a7f3d0' }}>

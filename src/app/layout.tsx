@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import DisclaimerBanner from '@/components/DisclaimerBanner'
@@ -6,6 +6,12 @@ import Footer from '@/components/Footer'
 import NavBar from '@/components/NavBar'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+}
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang="en">
       <head>
         <script
           async
@@ -31,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`${inter.className} bg-gray-50 text-gray-900 min-h-screen flex flex-col overflow-x-hidden`}>
+      <body className={`${inter.className} bg-gray-50 text-gray-900 min-h-screen flex flex-col w-full overflow-x-hidden`}>
         <NavBar />
         <main className="flex-1 w-full">{children}</main>
         <Footer />
