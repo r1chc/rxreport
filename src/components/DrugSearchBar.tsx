@@ -116,7 +116,7 @@ export default function DrugSearchBar({ size = 'default', initialValue = '', onS
   const isLarge = size === 'large'
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-2xl">
+    <div ref={containerRef} className="relative w-full max-w-2xl px-0">
       <form onSubmit={handleSubmit} className="flex w-full">
         <input
           type="text"
@@ -138,10 +138,10 @@ export default function DrugSearchBar({ size = 'default', initialValue = '', onS
         />
         <button
           type="submit"
-          className={`font-semibold text-white transition-colors ${
+          className={`font-semibold text-white transition-colors whitespace-nowrap shrink-0 ${
             isLarge
-              ? `px-8 py-4 text-lg ${open ? 'rounded-tr-xl' : 'rounded-r-xl'}`
-              : `px-5 py-2 ${open ? 'rounded-tr-lg' : 'rounded-r-lg'}`
+              ? `px-6 py-4 text-base ${open ? 'rounded-tr-xl' : 'rounded-r-xl'}`
+              : `px-4 py-2 ${open ? 'rounded-tr-lg' : 'rounded-r-lg'}`
           }`}
           style={{ background: '#1a3c34' }}
           onMouseEnter={e => (e.currentTarget.style.background = '#14532d')}

@@ -26,25 +26,25 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="px-6 py-20 text-center text-white" style={{ background: 'linear-gradient(135deg, #1a3c34 0%, #14532d 100%)' }}>
-        <div className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full mb-6" style={{ background: 'rgba(209,250,229,.12)', color: '#6ee7b7', border: '1px solid rgba(209,250,229,.2)' }}>
+      <section className="px-4 sm:px-6 py-12 sm:py-20 text-center text-white" style={{ background: 'linear-gradient(135deg, #1a3c34 0%, #14532d 100%)' }}>
+        <div className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full mb-5" style={{ background: 'rgba(209,250,229,.12)', color: '#6ee7b7', border: '1px solid rgba(209,250,229,.2)' }}>
           <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
           Sourced directly from FDA FAERS database
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">
           Know What the FDA Knows<br className="hidden md:block" /> About Your Drug
         </h1>
-        <p className="mb-10 max-w-xl mx-auto text-lg" style={{ color: '#a7f3d0' }}>
+        <p className="mb-8 max-w-xl mx-auto text-base sm:text-lg" style={{ color: '#a7f3d0' }}>
           Transparent, unfiltered adverse event data. The same reports regulators,
           researchers, and physicians rely on.
         </p>
-        <div className="flex justify-center">
+        <div className="flex justify-center px-0 sm:px-4">
           <DrugSearchBar size="large" />
         </div>
         <RecentSearches />
-        <div className="flex justify-center gap-8 mt-6 text-sm" style={{ color: '#6ee7b7' }}>
+        <div className="flex justify-center gap-4 sm:gap-8 mt-5 text-xs sm:text-sm flex-wrap" style={{ color: '#6ee7b7' }}>
           <span>✓ Official FDA data</span>
           <span>✓ No account needed</span>
           <span>✓ Updated weekly</span>
